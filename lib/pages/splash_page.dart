@@ -33,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
               height: 80,
                 width: 80,
                 child: Image(image: AssetImage("assets/images/logo1.png"),fit: BoxFit.cover,)),
-            Text("Chegirma",style: TextStyle(color: Colors.blue,fontSize: 30,fontWeight: FontWeight.bold),),
+            Text("Chegirma",style: TextStyle(color: Colors.blue.shade800,fontSize: 30,fontWeight: FontWeight.bold),),
           ],
         ),
       ),

@@ -1,10 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:skidka/pages/add_page.dart';
-import 'package:skidka/pages/book_page.dart';
-import 'package:skidka/pages/category_page.dart';
-import 'package:skidka/pages/main_page.dart';
-import 'package:skidka/pages/profile_page.dart';
+import 'package:skidka/pages/support_page/add_page.dart';
+import 'package:skidka/pages/support_page/book_page.dart';
+import 'package:skidka/pages/support_page/category_page.dart';
+import 'package:skidka/pages/support_page/main_page.dart';
+import 'package:skidka/pages/support_page/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -33,6 +33,29 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue.shade800,
+        toolbarHeight: 70,
+        title: TextField(
+          decoration: InputDecoration(
+            hintText: "Поиск во всех регионах",
+            filled: true,
+            fillColor: Colors.grey[200],
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+            prefixIcon: const Icon(Icons.search),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+          ),
+        ),
+        actions:[
+          IconButton(
+            onPressed: (){},
+            icon:Icon(Icons.shopping_cart,color: Colors.white,),
+          ),
+        ],
+      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

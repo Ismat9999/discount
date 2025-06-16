@@ -11,10 +11,6 @@ class _AddPageState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
-        backgroundColor: Colors.blue.shade800,
-        title: Text("Add",style: TextStyle(color: Colors.white),),
-      ),
       body: Center(child: Text("Add Page"),),
     );
   }

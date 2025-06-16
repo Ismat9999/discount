@@ -11,10 +11,6 @@ class _CategoryPageState extends State<CategoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
-        backgroundColor: Colors.blue.shade800,
-        title: Text("Category",style: TextStyle(color: Colors.white),),
-      ),
       body: Center(child: Text("Profile Page"),),
     );
   }
