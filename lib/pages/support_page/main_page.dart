@@ -11,6 +11,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  ScrollController scrollController= ScrollController();
   bool isLoading = false;
   final List<Map<String, dynamic>> topCategories = [
     {
@@ -150,7 +151,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(bottom: 10, left: 20, right: 20),
+          padding: EdgeInsets.only(bottom: 10, left: 15, right: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -168,9 +169,7 @@ class _MainPageState extends State<MainPage> {
                       },
                       child: Row(
                         children: [
-                          SizedBox(
-                            width: 20,
-                          ),
+                          SizedBox(width: 10,),
                           Icon(
                             item['icon'],
                             size: 18,
@@ -237,15 +236,16 @@ class _MainPageState extends State<MainPage> {
                   },
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10,),
               Container(
                 height: MediaQuery.of(context).size.height,
-                child: ListView.builder(
+                child: MasonryGridView.builder(
+                  gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
                   itemBuilder: (context,index){
                     return itemOfPost(context);
-                },
+                  },
                 ),
               ),
             ],
