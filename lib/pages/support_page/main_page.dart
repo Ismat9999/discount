@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../widgets/items/item_of_post.dart';
+
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -9,7 +11,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  bool isLoading= false;
+  bool isLoading = false;
   final List<Map<String, dynamic>> topCategories = [
     {
       'title': 'Жильё для поездки',
@@ -146,122 +148,108 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              height: 50,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: topCategories.map((item) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => item['page']),
-                      );
-                    },
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Icon(
-                          item['icon'],
-                          size: 18,
-                        ),
-                        Text(
-                          item['title'],
-                          style: TextStyle(fontSize: 13),
-                        ),
-                      ],
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-            Container(
-              width:(5 + 5) * 50.0,
-              height: 150,
-              child: GridView.builder(
-                itemCount: bottomCategories.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,crossAxisSpacing: 5,mainAxisSpacing: 5,childAspectRatio: 1.2,),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index){
-                  var item=bottomCategories[index];
-                  return GestureDetector(
-                    onTap: (){
-                      Navigator.push(context,MaterialPageRoute(builder: (_)=> item['page']));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.grey.shade300,
-                      ),
-                      child: Column(
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(bottom: 10, left: 20, right: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                height: 40,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: topCategories.map((item) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => item['page']),
+                        );
+                      },
+                      child: Row(
                         children: [
-                          Text(item['title'],textAlign:TextAlign.center,style: TextStyle(fontSize: 10),),
-                          SizedBox(height: 8,),
-                          Expanded(child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Image.asset(item['image'],fit: BoxFit.contain,height: 30,),
-                            ],
-                          )),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Icon(
+                            item['icon'],
+                            size: 18,
+                          ),
+                          Text(
+                            item['title'],
+                            style: TextStyle(fontSize: 13),
+                          ),
                         ],
                       ),
-                    ),
-                  );
+                    );
+                  }).toList(),
+                ),
+              ),
+              Container(
+                width: (5 + 5) * 50.0,
+                height: 150,
+                child: GridView.builder(
+                  itemCount: bottomCategories.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5,
+                    childAspectRatio: 1.2,
+                  ),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    var item = bottomCategories[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => item['page']));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.grey.shade300,
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              item['title'],
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 10),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Expanded(
+                                child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Image.asset(
+                                  item['image'],
+                                  fit: BoxFit.contain,
+                                  height: 30,
+                                ),
+                              ],
+                            )),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height,
+                child: ListView.builder(
+                  itemBuilder: (context,index){
+                    return itemOfPost(context);
                 },
+                ),
               ),
-            ),
-            SizedBox(height: 10,),
-            Container(
-              height: 500,
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 200,
-                          color: Colors.black,
-                        ),
-                      ),
-                      SizedBox(width: 10,),
-                      Expanded(
-                        child: Container(
-                          height: 200,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10,),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 200,
-                          color: Colors.black,
-                        ),
-                      ),
-                      SizedBox(width: 10,),
-                      Expanded(
-                        child: Container(
-                          height: 200,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

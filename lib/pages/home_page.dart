@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:skidka/pages/support_page/add_page.dart';
 import 'package:skidka/pages/support_page/book_page.dart';
