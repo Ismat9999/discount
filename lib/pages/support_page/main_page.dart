@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../widgets/items/item_of_grid_view.dart';
 import '../../widgets/items/item_of_post.dart';
 
 class MainPage extends StatefulWidget {
@@ -11,7 +12,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  ScrollController scrollController= ScrollController();
+  ScrollController scrollController = ScrollController();
   bool isLoading = false;
   final List<Map<String, dynamic>> topCategories = [
     {
@@ -71,12 +72,12 @@ class _MainPageState extends State<MainPage> {
   final List<Map<String, dynamic>> bottomCategories = [
     {
       'title': 'Авто',
-      'image': 'assets/images/logo1.png',
+      'image': 'assets/images/car.jpg',
       'page': BottomPage(title: 'Авто')
     },
     {
-      'title': 'Недвижи-\nмость',
-      'image': 'assets/images/logo1.png',
+      'title': 'Недвижимость',
+      'image': 'assets/images/wear.jpg',
       'page': BottomPage(title: 'Недвижимость')
     },
     {
@@ -85,12 +86,12 @@ class _MainPageState extends State<MainPage> {
       'page': BottomPage(title: 'Услуги')
     },
     {
-      'title': 'Электро-\nника',
+      'title': 'Электроника',
       'image': 'assets/images/logo1.png',
       'page': BottomPage(title: 'Электроника')
     },
     {
-      'title': 'Для дома\nи дачи',
+      'title': 'Для дома и дачи',
       'image': 'assets/images/logo1.png',
       'page': BottomPage(title: 'Для дома и дачи')
     },
@@ -100,7 +101,7 @@ class _MainPageState extends State<MainPage> {
       'page': BottomPage(title: 'Авто')
     },
     {
-      'title': 'Недвижи-\nмость',
+      'title': 'Недвижимость',
       'image': 'assets/images/logo1.png',
       'page': BottomPage(title: 'Недвижимость')
     },
@@ -110,22 +111,22 @@ class _MainPageState extends State<MainPage> {
       'page': BottomPage(title: 'Услуги')
     },
     {
-      'title': 'Электро-\nника',
+      'title': 'Электроника',
       'image': 'assets/images/logo1.png',
       'page': BottomPage(title: 'Электроника')
     },
     {
-      'title': 'Для дома\nи дачи',
+      'title': 'Для дома и дачи',
       'image': 'assets/images/logo1.png',
       'page': BottomPage(title: 'Для дома и дачи')
     },
     {
       'title': 'Авто',
-      'image': 'assets/images/logo1.png',
+      'image': 'assets/images/car.jpg',
       'page': BottomPage(title: 'Авто')
     },
     {
-      'title': 'Недвижи-\nмость',
+      'title': 'Недвижимость',
       'image': 'assets/images/logo1.png',
       'page': BottomPage(title: 'Недвижимость')
     },
@@ -135,12 +136,12 @@ class _MainPageState extends State<MainPage> {
       'page': BottomPage(title: 'Услуги')
     },
     {
-      'title': 'Электро-\nника',
+      'title': 'Электроника',
       'image': 'assets/images/logo1.png',
       'page': BottomPage(title: 'Электроника')
     },
     {
-      'title': 'Для дома\nи дачи',
+      'title': 'Для дома и дачи',
       'image': 'assets/images/logo1.png',
       'page': BottomPage(title: 'Для дома и дачи')
     },
@@ -151,6 +152,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
+          width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.only(bottom: 10, left: 15, right: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -169,7 +171,9 @@ class _MainPageState extends State<MainPage> {
                       },
                       child: Row(
                         children: [
-                          SizedBox(width: 10,),
+                          SizedBox(
+                            width: 10,
+                          ),
                           Icon(
                             item['icon'],
                             size: 18,
@@ -185,65 +189,26 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               Container(
-                width: (5 + 5) * 50.0,
                 height: 150,
-                child: GridView.builder(
-                  itemCount: bottomCategories.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                    childAspectRatio: 1.2,
-                  ),
+                child: ListView(
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    var item = bottomCategories[index];
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => item['page']));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.grey.shade300,
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              item['title'],
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 10),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Expanded(
-                                child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Image.asset(
-                                  item['image'],
-                                  fit: BoxFit.contain,
-                                  height: 30,
-                                ),
-                              ],
-                            )),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
+                  children: [
+                    itemOfGridView(context),
+                  ],
                 ),
+                ),
+              SizedBox(
+                height: 10,
               ),
-              SizedBox(height: 10,),
               Container(
                 height: MediaQuery.of(context).size.height,
                 child: MasonryGridView.builder(
-                  gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                  gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
                   crossAxisSpacing: 5,
                   mainAxisSpacing: 5,
-                  itemBuilder: (context,index){
+                  itemCount: 20,
+                  itemBuilder: (context, index) {
                     return itemOfPost(context);
                   },
                 ),
