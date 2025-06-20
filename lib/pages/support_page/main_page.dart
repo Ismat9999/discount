@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../widgets/items/item_of_grid_view.dart';
+import '../../widgets/items/item_of_list_member.dart';
 import '../../widgets/items/item_of_post.dart';
 
 class MainPage extends StatefulWidget {
@@ -14,6 +15,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   ScrollController scrollController = ScrollController();
   bool isLoading = false;
+
   final List<Map<String, dynamic>> topCategories = [
     {
       'title': 'Жильё для поездки',
@@ -197,11 +199,25 @@ class _MainPageState extends State<MainPage> {
                   ],
                 ),
                 ),
-              SizedBox(
-                height: 10,
+              Container(
+                height:100,
+                child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount:1),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 20,
+                  itemBuilder: (context,index){
+                     return itemOfListMember(context);
+                  },
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Рекомендации",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                  IconButton(onPressed: (){}, icon: Icon(Icons.list,size: 20,),),
+                ],
               ),
               Container(
-                height: MediaQuery.of(context).size.height,
+                height: 600,
                 child: MasonryGridView.builder(
                   gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
